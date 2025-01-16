@@ -13,3 +13,14 @@ It's "to do" app used to track and manage tasksusing simple command line interfa
 - List all tasks that are done
 - List all tasks that are not done
 - List all tasks that are in progress
+
+<hr>
+
+
+### How to use it?
+       Usage: task-cli <command> [arguments]
+        Available commands:
+        -  add <description><status>      =>>  Add a new task")
+        - update <task_id> <new_description><status>      =>> update a task")
+        - delete <task_id>       =>>  Delete a task")
+        - list [status]          =>>  List tasks (optional to filter: done, not-done, in-progress)")
