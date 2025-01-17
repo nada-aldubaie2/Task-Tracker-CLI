@@ -1,0 +1,134 @@
+[
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "date",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "load_tasks",
+        "kind": 2,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "def load_tasks():\n    if Path(TASKS_FILE).exists():\n        with open(TASKS_FILE, 'r', encoding='utf-8')as file:\n          # data = list(json.load(file))\n          # print(data)\n          # try:\n          #    data = json.load(file)\n          #    if isinstance(data, list):\n          #      return data\n          # except json.JSONDecodeError:",
+        "detail": "task_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "save_tasks",
+        "kind": 2,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "def save_tasks(task):\n    with open(TASKS_FILE, 'w', encoding='utf-8') as file:\n        json.dump(task, file, indent=8)\n# -----------------------------------------------------------\n# ============ C R U D Functions=======================\n# -----------------------------------------------------------\ndef add_task(description, status):\n    tasks = load_tasks()\n    task_id = len(tasks) + 1\n    new_task = {",
+        "detail": "task_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "add_task",
+        "kind": 2,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "def add_task(description, status):\n    tasks = load_tasks()\n    task_id = len(tasks) + 1\n    new_task = {\n        \"id\": task_id,\n        \"description\": description,\n        \"status\": status,\n        \"created_at\": datetime.now().isoformat(),\n        \"updated_at\": datetime.now().isoformat(),\n    }",
+        "detail": "task_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "update_task",
+        "kind": 2,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "def update_task(task_id, new_description, new_status):\n    tasks = load_tasks()\n    for task in tasks:\n        if task[\"id\"] == task_id:\n            task[\"description\"] = new_description\n            task[\"status\"] = new_status\n            task[\"updated_at\"] = datetime.now().isoformat()\n            save_tasks(tasks)\n            print(f\"The task {task_id} has updated successfully\")\n            return",
+        "detail": "task_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "delete_task",
+        "kind": 2,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "def delete_task(task_id):\n    tasks = load_tasks()\n    for task in tasks:\n        if task[\"id\"] == task_id:\n            tasks.remove(task)\n            save_tasks(tasks)\n            print(f\"The task {task_id} has deleted successfully\")\n            return\n    print(f\"Task with ID {task_id} not found.\")\n# -----------------------------------------------------------",
+        "detail": "task_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "list_tasks",
+        "kind": 2,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "def list_tasks(status=None):\n    tasks = load_tasks()\n    if status:\n        # new_list = [expression for item in iterable if condition] | called=<List Comprehension> =>2 create new list depend on condition\n        tasks = [task for task in tasks if task[\"status\"] == status]\n    for task in tasks:\n        print(f\"ID: {task['id']}, Description: {task['description']}, Status: {\n              task['status']}, Created: {task['created_at']}, Updated: {task['updated_at']}\", sep=\" |  \")\ndef mark_task(task_id, status):\n    tasks = load_tasks()",
+        "detail": "task_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "mark_task",
+        "kind": 2,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "def mark_task(task_id, status):\n    tasks = load_tasks()\n    for task in tasks:\n        if task[\"id\"] == task_id:\n            task[\"status\"] = status\n            task[\"updatedAt\"] = datetime.now().isoformat()\n            save_tasks(tasks)\n            print(f\"Task {task_id} marked as {status}.\")\n            return\n    print(f\"Task with ID {task_id} not found.\")",
+        "detail": "task_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "def main():\n    if len(sys.argv) < 2:\n        print(\"Usage: task-cli <command> [arguments]\")\n        print(\"Available commands:\")\n        print(\"  add <description><status>      - Add a new task\")\n        print(\"  update <task_id> <new_description><status>      - update a task\")\n        print(\"  delete <task_id>       - Delete a task\")\n        print(\"  list [status]          - List tasks (optional: done, not-done, in-progress)\")\n        return\n    command = sys.argv[1]",
+        "detail": "task_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "TASKS_FILE",
+        "kind": 5,
+        "importPath": "task_tracker",
+        "description": "task_tracker",
+        "peekOfCode": "TASKS_FILE = \"tasks.json\"\ndef load_tasks():\n    if Path(TASKS_FILE).exists():\n        with open(TASKS_FILE, 'r', encoding='utf-8')as file:\n          # data = list(json.load(file))\n          # print(data)\n          # try:\n          #    data = json.load(file)\n          #    if isinstance(data, list):\n          #      return data",
+        "detail": "task_tracker",
+        "documentation": {}
+    }
+]
